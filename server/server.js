@@ -17,6 +17,28 @@ const { Book } = require('./models/Book');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// GET //
+
+
+// POST //
+app.post('/api/book', (req, res) => {
+    const book = new Book(req.body)
+
+    book.save((err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({
+            post: true,
+            bookID: doc._id
+        })
+    });
+});
+
+// UPDATE //
+
+
+// DELETE //
+
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log(`Server Running on port: ${port}`);
