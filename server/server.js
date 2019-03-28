@@ -18,7 +18,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // GET //
+app.get('/api/getBook', (req, res) => {
+    let id = req.query.id;
 
+    Book.findById(id, (err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.send(doc);
+    })
+});
 
 // POST //
 app.post('/api/book', (req, res) => {
