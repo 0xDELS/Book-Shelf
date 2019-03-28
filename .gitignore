@@ -1,5 +1,11 @@
+## SERVER ##
 # Dependencies
 /node_modules
 
 # Server Config Files
 /server/config
+
+
+## CLIENT ##
+# Dependencies
+/client/node_modules
