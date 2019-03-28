@@ -7,7 +7,11 @@ const app = express();
 
 //DB
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE, { useNewUrlParser: true });
+mongoose.connect(config.DATABASE, { useNewUrlParser: true , useCreateIndex: true});
+
+//MODELS
+const { User } = require('./models/User');
+const { Book } = require('./models/Book');
 
 //MIDDLEWARES
 app.use(bodyParser.json());
