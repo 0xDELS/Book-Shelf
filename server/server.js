@@ -63,6 +63,14 @@ app.post('/api/updateBook', (req, res) => {
 });
 
 // DELETE //
+app.delete('/api/deleteBook', (req, res) => {
+    let id = req.query.id;
+
+    Book.findByIdAndRemove(id, (err, doc)=>{
+        if(err) return res.status(400).send(err);
+        res.json(true)
+    })
+});
 
 
 const port = process.env.PORT || 3001;
