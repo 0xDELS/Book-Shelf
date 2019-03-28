@@ -39,7 +39,7 @@ app.get('/api/getBooks', (req, res) => {
 })
 
 // POST //
-app.post('/api/book', (req, res) => {
+app.post('/api/addBook', (req, res) => {
     const book = new Book(req.body)
 
     book.save((err, doc) => {
@@ -49,6 +49,18 @@ app.post('/api/book', (req, res) => {
             bookID: doc._id
         })
     });
+});
+
+app.post('/api/addUser', (req, res) => {
+    const user = new User(req.body);
+
+    user.save((err, doc) => {
+        if(err) return res.json({success: false});
+        res.status(200).json({
+            success: true,
+            user: doc
+        })
+    })
 });
 
 // UPDATE //
