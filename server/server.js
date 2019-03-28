@@ -27,6 +27,17 @@ app.get('/api/getBook', (req, res) => {
     })
 });
 
+app.get('/api/getBooks', (req, res) => {
+    let skip = parseInt(req.query.skip);
+    let limit = parseInt(req.query.limit);
+    let order = req.query.order;
+
+    Book.find().skip(skip).sort({_id:order}).limit(limit).exec((err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.send(doc);
+    })
+})
+
 // POST //
 app.post('/api/book', (req, res) => {
     const book = new Book(req.body)
