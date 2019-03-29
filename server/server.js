@@ -38,6 +38,18 @@ app.get('/api/getBooks', (req, res) => {
     })
 })
 
+app.get('/api/getReviewer', (req, res) => {
+    let id = req.query.id;
+
+    User.findById(id, (err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.json({
+            name: doc.name,
+            lastname: doc.lastname
+        })
+    })
+})
+
 // POST //
 app.post('/api/addBook', (req, res) => {
     const book = new Book(req.body)
