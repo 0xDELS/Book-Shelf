@@ -50,6 +50,12 @@ app.get('/api/getReviewer', (req, res) => {
     })
 })
 
+app.get('/api/getUsers', (req, res) => {
+    User.find({}, (err, users) => {
+        res.status(200).send(users);
+    })
+})
+
 // POST //
 app.post('/api/addBook', (req, res) => {
     const book = new Book(req.body)
