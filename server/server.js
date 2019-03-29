@@ -63,6 +63,26 @@ app.post('/api/addUser', (req, res) => {
     })
 });
 
+app.post('/api/login', (req, res) => {
+    User.findOne({'email':req.body.email}, (err, user) => {
+        if(err) return res.status(400).send(err);
+        if(!user) return res.json({isAuth: false, message:'Auth Failed: User not found'})
+
+        user.comparePassword(req.body.password, (err, isMatch)=>{
+            if(!isMatch) return res.json({isAuth: false, message:'Auth Failed: Wrong Password'});
+            
+            user.generateToken((err, user) => {
+                if(err) return res.status(400).send(err);
+                res.cookie('Auth', user.token).json({
+                    isAuth: true,
+                    id: user._id,
+                    email: user.email
+                })
+            })
+        })
+    })
+})
+
 // UPDATE //
 app.post('/api/updateBook', (req, res) => {
     Book.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, doc) => {
