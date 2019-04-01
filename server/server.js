@@ -56,6 +56,13 @@ app.get('/api/getUsers', (req, res) => {
     })
 })
 
+app.get('/api/userReviews', (req, res) => {
+    Book.find({ownerID:req.query.user}).exec((err, doc)=>{
+        if(err) return res.status(400).send(err);
+        res.send(doc);
+    })
+})
+ 
 // POST //
 app.post('/api/addBook', (req, res) => {
     const book = new Book(req.body)
