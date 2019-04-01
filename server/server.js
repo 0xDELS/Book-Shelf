@@ -14,10 +14,19 @@ const { User } = require('./models/User');
 const { Book } = require('./models/Book');
 
 //MIDDLEWARES
+const { Auth } = require('./middleware/Auth');
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 // GET //
+app.get('/api/logout', Auth, (req, res)=> {
+    req.user.deleteToken(req.token, (err, user) => {
+        if(err) return res.status(400).send(err);
+        res.sendStatus(200);
+    })
+})
+
 app.get('/api/getBook', (req, res) => {
     let id = req.query.id;
 
@@ -98,7 +107,7 @@ app.post('/api/login', (req, res) => {
             
             user.generateToken((err, user) => {
                 if(err) return res.status(400).send(err);
-                res.cookie('Auth', user.token).json({
+                res.cookie('auth', user.token).json({
                     isAuth: true,
                     id: user._id,
                     email: user.email
