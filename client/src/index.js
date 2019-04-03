@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-// import './setupProxy';
+import './setupProxy';
 import reducers from './Reducers'
 import Routes from './routes';
 
