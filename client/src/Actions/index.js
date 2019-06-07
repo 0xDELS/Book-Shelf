@@ -78,6 +78,26 @@ export function getUserPosts(userID){
     }
 }
 
+export function getBook(bookID){
+    const request = axios.get(`/api/getBook?id=${bookID}`)
+                    .then(response => response.data)
+
+    return {
+        type:'GET_BOOK',
+        payload: request
+    }
+}
+
+export function updateBook(data){
+    const request = axios.post(`/api/updateBook`, data)
+                    .then(response => response.data)
+
+    return{
+        type: 'UPDATE_BOOK',
+        payload: request
+    }
+}
+
 /*+ USER **/
 
 export function loginUser({email, password}) {
