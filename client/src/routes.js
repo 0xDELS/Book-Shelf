@@ -7,6 +7,7 @@ import Login from './Containers/Admin/Login'
 import Auth from './HOC/Auth'
 import User  from './Components/Admin/User'
 import AddReview from './Components/Admin/AddReview'
+import UserReviews from './Components/Admin/UserReviews'
 
 const Routes = () => {
     return (
@@ -17,6 +18,7 @@ const Routes = () => {
                 <Route path="/user" exact component={Auth(User, true)}/>
                 <Route path="/user/add-review" exact component={Auth(AddReview, true)}/>
                 <Route path="/books/:id" exact component={Auth(BookView)}/>
+                <Route path="/user/user-reviews" exact component={Auth(UserReviews, true)}/>
             </Switch>
         </Layout>
     );

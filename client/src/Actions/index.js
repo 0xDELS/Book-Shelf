@@ -68,6 +68,16 @@ export function clearNewReview(){
     }
 }
 
+export function getUserPosts(userID){
+    const request = axios.get(`/api/userReviews?user=${userID}`)
+                    .then(response => response.data)
+    
+    return{
+        type: 'GET_USER_REVIEWS',
+        payload: request
+    }
+}
+
 /*+ USER **/
 
 export function loginUser({email, password}) {
