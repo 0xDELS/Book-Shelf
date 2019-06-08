@@ -10,6 +10,14 @@ export default function(state={}, action){
                 updatedBook: action.payload.success,
                 book: action.payload.doc
             }
+        case 'DELETE_BOOK':
+            return{ ...state, bookDeleted: action.payload }
+        case 'CLEAR_BOOK':
+            return { 
+                ...state,
+                book: action.payload.book,
+                bookDeleted: action.payload.bookDeleted
+            }
         case 'GET_BOOK_WITH_REVIEWER':
             return { ...state, book:action.payload.book, reviewer:action.payload.reviewer }
         case 'CLEAR_BOOK_WITH_REVIEWER':

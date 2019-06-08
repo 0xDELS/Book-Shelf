@@ -27,8 +27,22 @@ class EditReview extends Component {
         this.props.dispatch(updateBook(this.state.formdata))
     }
 
+    deleteReview = () => {
+        this.props.dispatch(deleteBook(this.props.match.params.id))
+    }
+
+    redirectUser = () => {
+        setTimeout(() => {
+            this.props.history.push('/user/user-reviews')
+        }, 1000)
+    }
+
     componentWillMount(){
         this.props.dispatch(getBook(this.props.match.params.id))
+    }
+    
+    componentWillUnmount(){
+        this.props.dispatch(clearBook())
     }
 
     componentWillReceiveProps(nextProps){
@@ -54,6 +68,15 @@ class EditReview extends Component {
                         Book Updated, <Link to={`/books/${this.props.books.book._id}`}>See Book Updated</Link>
                     </div>    
                 :null}
+
+                {
+                    this.props.books.bookDeleted ?
+                        <div className="red_tag">
+                            Book Deleted
+                            {this.redirectUser()}
+                        </div>
+                    :null
+                }
                 <form onSubmit={this.submitForm}>
                     <h2>Edit review</h2>
                     <div className="form_element">
@@ -87,6 +110,13 @@ class EditReview extends Component {
                     </div>
 
                     <button type="submit">Edit Review</button>
+                    <div className="delete_post">
+                        <div className="button"
+                            onClick={this.deleteReview}
+                        >
+                            Delete Review
+                        </div>
+                    </div>
                 </form>
             </div>
         );
